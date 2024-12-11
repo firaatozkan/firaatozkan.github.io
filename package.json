@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://firaatozkan.github.io/personal_blog",
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "cra-template-typescript": "1.2.0",
     "personal_blog": "file:",
     "react": "^19.0.0",

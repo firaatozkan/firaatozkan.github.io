@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { posts } from '../data/posts.ts';
+import { posts } from '../data/Posts.tsx';
 
 const BlogList: React.FC = () => {
     return (
@@ -9,7 +9,7 @@ const BlogList: React.FC = () => {
             <ul>
                 {posts.map((post) => (
                     <li key={post.id}>
-                        <Link to={`/post/${post.id}`}>
+                        <Link to={`/posts/${post.id}`}>
                             <h2>{post.title}</h2>
                         </Link>
                         <p>{post.summary}</p>
