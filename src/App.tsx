@@ -28,11 +28,11 @@ const App: React.FC = () => (
                                 <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Posts
                                 </Link>
-                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <ul className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                                     {
                                         posts.map((post) => (
                                             <li>
-                                                <Link className="dropdown-item" to={`/posts/${post.id}`}>
+                                                <Link className="dropdown-item bg-dark text-white" to={`/posts/${post.id}`}>
                                                     {post.title}
                                                 </Link>
                                             </li>
