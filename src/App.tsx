@@ -9,7 +9,7 @@ import { posts } from './data/Posts.tsx';
 const App: React.FC = () => (
     <>
         <GlobalStyle />
-        <Router basename='/personal_blog'>
+        <Router>
             {/* Navbar */}
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
