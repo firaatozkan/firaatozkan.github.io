@@ -2,7 +2,7 @@
   "name": "personal_blog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://firaatozkan.github.io/personal_blog",
+  "homepage": "https://firaatozkan.github.io",
   "dependencies": {
     "bootstrap": "^5.3.3",
     "cra-template-typescript": "1.2.0",
