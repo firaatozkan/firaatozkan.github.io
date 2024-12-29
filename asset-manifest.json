@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.ca67ef22.css",
-    "main.js": "/static/js/main.3b7a0b72.js",
+    "main.js": "/static/js/main.a60ca47a.js",
     "static/media/TypelessVector_2.png": "/static/media/TypelessVector_2.1460ed26ed828b805969.png",
     "static/media/TypelessVector_1.png": "/static/media/TypelessVector_1.6531016cfeb410386e1e.png",
     "index.html": "/index.html",
     "main.ca67ef22.css.map": "/static/css/main.ca67ef22.css.map",
-    "main.3b7a0b72.js.map": "/static/js/main.3b7a0b72.js.map"
+    "main.a60ca47a.js.map": "/static/js/main.a60ca47a.js.map"
   },
   "entrypoints": [
     "static/css/main.ca67ef22.css",
-    "static/js/main.3b7a0b72.js"
+    "static/js/main.a60ca47a.js"
   ]
 }
