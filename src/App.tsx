@@ -2,15 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import BlogList from './pages/BlogList.tsx';
 import GlobalStyle from './styles/GlobalStyle.ts';
-import 'bootstrap/dist/css/bootstrap.min.css';  // Import Bootstrap CSS
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';  // Import Bootstrap JS
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { posts } from './data/Posts.tsx';
 
 const App: React.FC = () => (
     <>
         <GlobalStyle />
         <Router>
-            {/* Navbar */}
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">Fırat Özkan</Link>
@@ -23,7 +22,6 @@ const App: React.FC = () => (
                                 <Link className="nav-link" to="/">Home</Link>
                             </li>
 
-                            {/* Dropdown for Blog Posts */}
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Posts
@@ -45,14 +43,12 @@ const App: React.FC = () => (
                 </div>
             </nav>
 
-            {/* Banner */}
             <div className="banner">
-                {/* Routes */}
                 <Routes>
                     <Route path="/" element={<BlogList />} />
                     {
                         posts.map((post) => (
-                            <Route path={`/posts/${post.id}`} element={<post.component/>} />
+                            <Route path={`/posts/${post.id}`} element={<post.component />} />
                         ))
                     }
                 </Routes>
