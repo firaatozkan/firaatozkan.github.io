@@ -1,8 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ZoomableImg from '../pages/ZoomableImg.tsx';
-import TypelessVector_1 from "./TypelessVector_1.png";
-import TypelessVector_2 from "./TypelessVector_2.png";
 import Highlight from 'react-highlight';
 import 'highlight.js/styles/stackoverflow-dark.css';
 
