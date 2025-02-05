@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import ZoomableImg from '../pages/ZoomableImg.tsx';
 import TypelessVector_1 from "./TypelessVector_1.png";
 import TypelessVector_2 from "./TypelessVector_2.png";
+import Highlight from 'react-highlight';
+import 'highlight.js/styles/stackoverflow-dark.css';
 
 const TypelessVector: React.FC = () => {
 
@@ -26,14 +28,93 @@ const TypelessVector: React.FC = () => {
                 I had learned this technique inspecting possible <strong>std::any</strong> implementations. <br />
                 Also, since we can not have template constructors, I decided to hide the constructor to the API user. Instead, to create an instance, we would need to call the static <strong>"create"</strong> method.
             </p>
-            <ZoomableImg imgSrc={TypelessVector_1} defaultHeight='40%' />
-            <br /><br />
+            <div style={{ paddingLeft: '15%', paddingRight: '15%', textAlign: 'left' }}>
+                <Highlight className='language-cpp'>
+                    {
+`class TypelessVector
+{
+private:
+    template <typename T>
+    TypelessVector(T* ptr)
+        : m_data(ptr),
+          m_deleter([] (void* ptr, size_t size)
+                    {
+                        for (size_t i = 0; i < size; ++i)
+                            static_cast<T*>(ptr)[i].~T();
+                        std::free(ptr);
+                    })
+    {
+    }
+
+public:
+    ~TypelessVector()
+    {
+        m_deleter(m_data, m_size);
+    }
+
+    template <typename T>
+    static TypelessVector create()
+    {
+        return TypelessVector {static_cast<T*>(nullptr)};
+    }
+`}
+                </Highlight>
+            </div>
             <p>
                 After this, we have business as usual. However, one thing to note was that, while growing our heap-allocated data, <br />
                 it is important we do not mess with the alignment of our memory block. It should be aligned appropriately, respectively to the contained type.
             </p>
-            <ZoomableImg imgSrc={TypelessVector_2} defaultHeight='40%' inputScale={1.2} />
-            <br /><br />
+            <div style={{ paddingLeft: '15%', paddingRight: '13.7%', textAlign: 'left' }}>
+                <Highlight className='language-cpp'>
+                    {
+`    template <typename T>
+    void emplaceBack(auto&&... args)
+    {
+        growIfNeeded<T>();
+        T* data = static_cast<T*>(m_data);
+        new (&data[m_size++]) T (std::forward<decltype(args)>(args)...);
+    }
+
+    void pushBack(auto&& input)
+    {
+        using T = std::decay_t<decltype(input)>;
+        growIfNeeded<T>();
+        T* data = static_cast<T*>(m_data);
+        new (&data[m_size++]) T (std::forward<decltype(input)>(input));
+    }
+
+    template <typename T>
+    std::span<T> getView() noexcept
+    {
+        return {static_cast<T*>(m_data), m_size};
+    }
+
+    template <typename T>
+    const std::span<T> getView() const noexcept
+    {
+        return {static_cast<T*>(m_data), m_size};
+    }
+
+private:
+    template <typename T>
+    void growIfNeeded()
+    {
+        if (m_size == m_capacity)
+        {
+            m_capacity = m_capacity == 0 ? 1 : m_capacity * 2;
+            void* tempData = std::aligned_alloc(alignof(T), sizeof(T) * m_capacity);
+
+            for (size_t i = 0; i < m_size; ++i)
+                new (&tempData[i]) T (std::move(static_cast<T*>(m_data)[i]));
+
+            m_deleter(m_data, m_size);
+
+            m_data = tempData;
+        }
+    }
+`}
+                </Highlight>
+            </div>
             <p>
                 I also added a <strong>"getView"</strong> method, so that we can iterate over our data, should we provide the compile-time type information to the API. <hr />
                 It is important to note that, for now, this implementation was not done with <strong>Rule of 5</strong> in mind. For further use, move and copy constructors, <br />
@@ -43,7 +124,7 @@ const TypelessVector: React.FC = () => {
             </p>
             <p>
                 You could check out this code snippet over this <Link to="https://godbolt.org/z/EKT5qvhej"><strong>godbolt link</strong></Link><br />
-                Feel free to ask me any questions you might have, although I'm not expecting any readers any time soon...
+                Feel free to ask me any questions you might have!
             </p>
         </div>
     );

@@ -6,9 +6,11 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "cra-template-typescript": "1.2.0",
+    "highlight.js": "^11.11.1",
     "personal_blog": "file:",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-highlight": "^0.15.0",
     "react-router-dom": "^7.0.2",
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.13"
